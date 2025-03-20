@@ -28,11 +28,19 @@ jobs:
         cd server
         npm install
 
-    - name: Install Frontend Dependencies and Build
-      run: |
-        cd client
-        npm install
-        npm run build
+        - name: Install dependencies and build frontend
+        run: |
+          cd client
+          npm ci
+          npm run build
+
+        - name: Debug Build Folder
+        run: |
+          cd client
+          ls -la
+          ls -la build || echo "🚨 Build folder does NOT exist!"
+
+
 
     - name: Deploy Backend to Azure Web App
       uses: azure/webapps-deploy@v3
