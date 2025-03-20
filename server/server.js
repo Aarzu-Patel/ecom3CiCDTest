@@ -33,7 +33,7 @@ const PORT = process.env.PORT || 5001;
 
 app.use(
   cors({
-    origin: "https://backenddemowebapp.azurewebsites.net/", // Allows all origins
+    origin: "https://frontenddemoreactwebapp.azurewebsites.net", // ✅ Correct frontend URL
     methods: ["GET", "POST", "DELETE", "PUT"],
     allowedHeaders: [
       "Content-Type",
@@ -42,7 +42,7 @@ app.use(
       "Expires",
       "Pragma",
     ],
-    credentials: false, // Must be false when using '*' for origin
+    credentials: true, // ✅ Allow credentials (cookies, sessions, auth headers)
   })
 );
 
