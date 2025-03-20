@@ -33,12 +33,12 @@ jobs:
         cd client
         npm install
         npm run build
-        ls -la build  # Verify if build folder is created
+        ls -la dist  # Verify if dist folder is created
 
     - name: Verify Frontend Build Exists
       run: |
-        if [ ! -d "client/build" ]; then
-          echo "Error: client/build directory not found!"
+        if [ ! -d "client/dist" ]; then
+          echo "Error: client/dist directory not found!"
           exit 1
         fi
 
@@ -52,4 +52,4 @@ jobs:
       uses: azure/webapps-deploy@v3
       with:
         app-name: frontenddemoreactwebapp
-        package: ./client/build  # Ensure correct relative path
+        package: ./client/dist  # Use dist instead of build
