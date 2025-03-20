@@ -24,7 +24,7 @@ const AZURE_COSMOS_CONNECTIONSTRING=process.env.AZURE_COSMOS_CONNECTIONSTRING;
 
 
 mongoose
-  .connect(AZURE_COSMOS_CONNECTIONSTRING)  // Removed deprecated options
+  .connect(AZURE_COSMOS_CONNECTIONSTRING)  // Removed deprecated options check
   .then(() => console.log("MongoDB connected"))
   .catch((error) => console.error("MongoDB connection error:", error));
 
