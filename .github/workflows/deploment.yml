@@ -1,0 +1,47 @@
+name: Deploy to Azure App Services
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Login to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+
+    - name: Install Backend Dependencies
+      run: |
+        cd server
+        npm install
+
+    - name: Install Frontend Dependencies and Build
+      run: |
+        cd client
+        npm install
+        npm run build
+
+    - name: Deploy Backend to Azure Web App
+      uses: azure/webapps-deploy@v3
+      with:
+        app-name: backenddemowebapp
+        package: server
+
+    - name: Deploy Frontend to Azure Web App
+      uses: azure/webapps-deploy@v3
+      with:
+        app-name: frontenddemoreactwebapp
+        package: client/build

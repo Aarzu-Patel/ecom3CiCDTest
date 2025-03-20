@@ -18,7 +18,7 @@ export const fetchAllFilteredProducts = createAsyncThunk(
     });
 
     const result = await axios.get(
-      `http://localhost:5001/api/shop/products/get?${query}`
+      `https://backenddemowebapp.azurewebsites.net/api/shop/products/get?${query}`
     );
 
     console.log(result);
@@ -31,7 +31,7 @@ export const fetchProductDetails = createAsyncThunk(
   "/products/fetchProductDetails",
   async (id) => {
     const result = await axios.get(
-      `http://localhost:5001/api/shop/products/get/${id}`
+      `https://backenddemowebapp.azurewebsites.net/api/shop/products/get/${id}`
     );
 
     return result?.data;
