@@ -22,6 +22,7 @@ const commonFeatureRouter = require("./routes/common/feature-routes");
 
 const AZURE_COSMOS_CONNECTIONSTRING=process.env.AZURE_COSMOS_CONNECTIONSTRING;
 
+
 mongoose
   .connect(AZURE_COSMOS_CONNECTIONSTRING)  // Removed deprecated options
   .then(() => console.log("MongoDB connected"))
