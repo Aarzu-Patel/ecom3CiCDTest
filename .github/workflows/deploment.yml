@@ -28,28 +28,28 @@ jobs:
         cd server
         npm install
 
-        - name: Install dependencies and build frontend
-        run: |
-          cd client
-          npm ci
-          npm run build
+    - name: Install Frontend Dependencies and Build
+      run: |
+        cd client
+        npm install
+        npm run build
+        ls -la build  # Verify if build folder is created
 
-        - name: Debug Build Folder
-        run: |
-          cd client
-          ls -la
-          ls -la build || echo "🚨 Build folder does NOT exist!"
-
-
+    - name: Verify Frontend Build Exists
+      run: |
+        if [ ! -d "client/build" ]; then
+          echo "Error: client/build directory not found!"
+          exit 1
+        fi
 
     - name: Deploy Backend to Azure Web App
       uses: azure/webapps-deploy@v3
       with:
         app-name: backenddemowebapp
-        package: server
+        package: ./server  # Ensure correct relative path
 
     - name: Deploy Frontend to Azure Web App
       uses: azure/webapps-deploy@v3
       with:
         app-name: frontenddemoreactwebapp
-        package: client/build
+        package: ./client/build  # Ensure correct relative path
