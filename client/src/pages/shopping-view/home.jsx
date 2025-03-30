@@ -52,6 +52,12 @@ function ShoppingHome() {
   const { productList, productDetails } = useSelector(
     (state) => state.shopProducts
   );
+  const banners = [
+    { id: 0, content: bannerOne },
+    { id: 1, content: bannerTwo },
+    { id: 2, content: bannerThree },
+  ];
+
   const { featureImageList } = useSelector((state) => state.commonFeature);
 
   const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
@@ -99,11 +105,11 @@ function ShoppingHome() {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prevSlide) => (prevSlide + 1) % featureImageList.length);
+      setCurrentSlide((prevSlide) => (prevSlide + 1) % banners.length);
     }, 15000);
 
     return () => clearInterval(timer);
-  }, [featureImageList]);
+  }, [banners]);
 
   useEffect(() => {
     dispatch(
@@ -123,43 +129,36 @@ function ShoppingHome() {
   return (
     <div className="flex flex-col min-h-screen">
       <div className="relative w-full h-[600px] overflow-hidden">
-        {featureImageList && featureImageList.length > 0
-          ? featureImageList.map((slide, index) => (
-              <img
-                src={slide?.image}
-                key={index}
-                className={`${
-                  index === currentSlide ? "opacity-100" : "opacity-0"
-                } absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000`}
-              />
-            ))
-          : null}
-        <Button
-          variant="outline"
-          size="icon"
+        {banners.map((slide, index) => (
+          <img
+            src={slide.content} // Fix: Using content instead of slide.image
+            key={index}
+            className={`${
+              index === currentSlide ? "opacity-100" : "opacity-0"
+            } absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000`}
+            alt={`Slide ${index + 1}`}
+          />
+        ))}
+
+        {/* Previous Button */}
+        <button
           onClick={() =>
-            setCurrentSlide(
-              (prevSlide) =>
-                (prevSlide - 1 + featureImageList.length) %
-                featureImageList.length
-            )
+            setCurrentSlide((prevSlide) => (prevSlide - 1 + banners.length) % banners.length)
           }
-          className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white/80"
+          className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white/80 p-2 rounded"
         >
-          <ChevronLeftIcon className="w-4 h-4" />
-        </Button>
-        <Button
-          variant="outline"
-          size="icon"
+          <ChevronLeftIcon className="w-6 h-6" />
+        </button>
+
+        {/* Next Button */}
+        <button
           onClick={() =>
-            setCurrentSlide(
-              (prevSlide) => (prevSlide + 1) % featureImageList.length
-            )
+            setCurrentSlide((prevSlide) => (prevSlide + 1) % banners.length)
           }
-          className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white/80"
+          className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white/80 p-2 rounded"
         >
-          <ChevronRightIcon className="w-4 h-4" />
-        </Button>
+          <ChevronRightIcon className="w-6 h-6" />
+        </button>
       </div>
       <section className="py-12 bg-gray-50">
         <div className="container mx-auto px-4">

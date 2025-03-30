@@ -13,7 +13,7 @@ export const createNewOrder = createAsyncThunk(
   "/order/createNewOrder",
   async (orderData) => {
     const response = await axios.post(
-      "https://backenddemowebapp.azurewebsites.net/api/shop/order/create",
+      "https://backendapp-dddthqaxbrasahbh.canadacentral-01.azurewebsites.net/api/shop/order/create",
       orderData
     );
 
@@ -25,7 +25,7 @@ export const capturePayment = createAsyncThunk(
   "/order/capturePayment",
   async ({ paymentId, payerId, orderId }) => {
     const response = await axios.post(
-      "https://backenddemowebapp.azurewebsites.net/api/shop/order/capture",
+      "https://backendapp-dddthqaxbrasahbh.canadacentral-01.azurewebsites.net/api/shop/order/capture",
       {
         paymentId,
         payerId,
@@ -41,7 +41,7 @@ export const getAllOrdersByUserId = createAsyncThunk(
   "/order/getAllOrdersByUserId",
   async (userId) => {
     const response = await axios.get(
-      `https://backenddemowebapp.azurewebsites.net/api/shop/order/list/${userId}`
+      `https://backendapp-dddthqaxbrasahbh.canadacentral-01.azurewebsites.net/api/shop/order/list/${userId}`
     );
 
     return response.data;
@@ -52,7 +52,7 @@ export const getOrderDetails = createAsyncThunk(
   "/order/getOrderDetails",
   async (id) => {
     const response = await axios.get(
-      `https://backenddemowebapp.azurewebsites.net/api/shop/order/details/${id}`
+      `https://backendapp-dddthqaxbrasahbh.canadacentral-01.azurewebsites.net/api/shop/order/details/${id}`
     );
 
     return response.data;
@@ -74,7 +74,7 @@ const shoppingOrderSlice = createSlice({
       })
       .addCase(createNewOrder.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.approvalURL = action.payload.approvalURL;
+        state.approvalURL = '/shop/payment-success';
         state.orderId = action.payload.orderId;
         sessionStorage.setItem(
           "currentOrderId",

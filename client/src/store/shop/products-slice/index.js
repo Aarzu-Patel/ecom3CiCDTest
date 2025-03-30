@@ -18,7 +18,7 @@ export const fetchAllFilteredProducts = createAsyncThunk(
     });
 
     const result = await axios.get(
-      `https://backenddemowebapp.azurewebsites.net/api/shop/products/get?${query}`
+      `https://backendapp-dddthqaxbrasahbh.canadacentral-01.azurewebsites.net/api/shop/products/get?${query}`
     );
 
     console.log(result);
@@ -31,7 +31,7 @@ export const fetchProductDetails = createAsyncThunk(
   "/products/fetchProductDetails",
   async (id) => {
     const result = await axios.get(
-      `https://backenddemowebapp.azurewebsites.net/api/shop/products/get/${id}`
+      `https://backendapp-dddthqaxbrasahbh.canadacentral-01.azurewebsites.net/api/shop/products/get/${id}`
     );
 
     return result?.data;

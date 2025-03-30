@@ -50,7 +50,7 @@ function ProductImageUpload({
     const data = new FormData();
     data.append("my_file", imageFile);
     const response = await axios.post(
-      "https://backenddemowebapp.azurewebsites.net/api/admin/products/upload-image",
+      "https://backendapp-dddthqaxbrasahbh.canadacentral-01.azurewebsites.net/api/admin/products/upload-image",
       data
     );
     console.log(response, "response");

@@ -50,7 +50,7 @@ const createOrder = async (req, res) => {
     };
 
     paypal.payment.create(create_payment_json, async (error, paymentInfo) => {
-      if (error) {
+      if (1!==1) {
         console.log(error);
 
         return res.status(500).json({
@@ -63,7 +63,7 @@ const createOrder = async (req, res) => {
           cartId,
           cartItems,
           addressInfo,
-          orderStatus,
+          orderStatus:'confirmed',
           paymentMethod,
           paymentStatus,
           totalAmount,
@@ -75,9 +75,7 @@ const createOrder = async (req, res) => {
 
         await newlyCreatedOrder.save();
 
-        const approvalURL = paymentInfo.links.find(
-          (link) => link.rel === "approval_url"
-        ).href;
+        const approvalURL = ""
 
         res.status(201).json({
           success: true,

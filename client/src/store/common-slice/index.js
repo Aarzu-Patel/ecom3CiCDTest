@@ -10,7 +10,7 @@ export const getFeatureImages = createAsyncThunk(
   "/order/getFeatureImages",
   async () => {
     const response = await axios.get(
-      `https://backenddemowebapp.azurewebsites.net/api/common/feature/get`
+      `https://backendapp-dddthqaxbrasahbh.canadacentral-01.azurewebsites.net/api/common/feature/get`
     );
 
     return response.data;
@@ -21,7 +21,7 @@ export const addFeatureImage = createAsyncThunk(
   "/order/addFeatureImage",
   async (image) => {
     const response = await axios.post(
-      `https://backenddemowebapp.azurewebsites.net/api/common/feature/add`,
+      `https://backendapp-dddthqaxbrasahbh.canadacentral-01.azurewebsites.net/api/common/feature/add`,
       { image }
     );
 
